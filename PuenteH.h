@@ -13,20 +13,23 @@ class PuenteH
 {
     public:
         enum modeloPuenteH {IRF3205, TB6612, L298, L293, L9110};
+        enum lateral{IZQUIERDO, DERECHO};
 
         PuenteH(modeloPuenteH modelo, int pinENABLE = -1);
         ~PuenteH();
         void setMotor1(int pinPWM, int pinINA, int pinINB = -1);
         void setMotor2(int pinPWM, int pinINA, int pinINB = -1);
         void initMotors();
-        void turnLeft(int speed);
-        void turnRight(int speed);
-        void goForward(int speed);
-        void goBackward(int speed);
+        void turnLeft(int speed, bool escala = false);
+        void turnRight(int speed, bool escala = false);
+        void goForward(int speed, bool escala = false);
+        void goBackward(int speed, bool escala = false);
         void stop();
         void correctToLeft();
         void correctToRight();
         void resetCorrectToLeftAndRight();
+        int getMotorIzq();
+        int getMotorDer();
 
     private:
         enum modo {MODO_UNDEF, MODO_STOP, MODO_AVANZA, MODO_RETROCEDE, MODO_GIRO_IZQUIERDA, MODO_GIRO_DERECHA};
@@ -36,6 +39,7 @@ class PuenteH
 
         void setDirSpeed(modo candidato, int speed);
         void selectConstants(modeloPuenteH modelo);
+        int getMotorDir(lateral id);
         
         int _MAX_PWM;
         int _MIN_PWM;

@@ -18,11 +18,12 @@ class MotorCtrl
         ~MotorCtrl();
         resultados setSpeed(int pwm);
         void stop();
-        void setDirection(direccion);
+        void setDirection(direccion dir);
         void initMotor();
         void setOffset(int offset);
         int getOffset();
         void setConstants(int max, int min, int start);
+        direccion getDirection();
 
     private:
         int MAX_PWM;

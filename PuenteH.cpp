@@ -99,26 +99,30 @@ void PuenteH::initMotors()  // Inicializa motores
 }
 
 
-void PuenteH::turnLeft(int speed)
+void PuenteH::turnLeft(int speed, bool escala)
 {
+    if(escala == true) speed = map(speed, 0, 9, _MIN_PWM, _MAX_PWM);
     setDirSpeed(MODO_GIRO_IZQUIERDA, speed);
 }
 
 
-void PuenteH::turnRight(int speed)
+void PuenteH::turnRight(int speed, bool escala)
 {
+    if(escala == true) speed = map(speed, 0, 9, _MIN_PWM, _MAX_PWM);
     setDirSpeed(MODO_GIRO_DERECHA, speed);
 }
 
 
-void PuenteH::goForward(int speed)
+void PuenteH::goForward(int speed, bool escala)
 {
+    if(escala == true) speed = map(speed, 0, 9, _MIN_PWM, _MAX_PWM);
     setDirSpeed(MODO_AVANZA, speed);
 }
 
 
-void PuenteH::goBackward(int speed)
+void PuenteH::goBackward(int speed, bool escala)
 {
+    if(escala == true) speed = map(speed, 0, 9, _MIN_PWM, _MAX_PWM);
     setDirSpeed(MODO_RETROCEDE, speed);
 }
 
@@ -223,3 +227,37 @@ void PuenteH::resetCorrectToLeftAndRight()
     _motor2->setOffset(0);
 }
 
+
+int PuenteH::getMotorDir(lateral id)
+{
+    int dir = 1;
+    MotorCtrl::direccion dire;
+
+    switch(id)
+    {
+        case IZQUIERDO:
+            dire = _motor2->getDirection();
+            break;
+        case DERECHO:
+            dire = _motor1->getDirection();
+            break;
+        default:
+            break;
+    }
+    
+    if(dire == MotorCtrl::RETROCEDE) dir = -1;
+
+    return dir;
+}
+
+
+int PuenteH::getMotorIzq()
+{
+    return getMotorDir(IZQUIERDO);
+}
+
+
+int PuenteH::getMotorDer()
+{
+    return getMotorDir(DERECHO);
+}

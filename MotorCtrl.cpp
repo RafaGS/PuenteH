@@ -99,6 +99,12 @@ void MotorCtrl::setDirection(MotorCtrl::direccion dir) // Selecciona el sentido 
 }
 
 
+MotorCtrl::direccion MotorCtrl::getDirection() // Indica el sentido de giro del motor
+{
+    return _direction;
+}
+
+
 void MotorCtrl::stop()  // detiene el motor
 {
     if ( _velPWM != 0 ) // escribe sólo si el valor ha cambiado
