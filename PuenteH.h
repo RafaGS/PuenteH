@@ -28,7 +28,7 @@ class PuenteH
         void correctToLeft();
         void correctToRight();
         void resetCorrectToLeftAndRight();
-        int getMotorIzq();
+        unsigned int getMotorIzq();
         int getMotorDer();
 
     private:
